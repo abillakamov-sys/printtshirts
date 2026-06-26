@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SophiaShop — Admin</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#F7F5F2; --white:#fff; --black:#111;
+  --accent:#FF3B3B; --green:#22C55E; --border:#E8E4DF;
+  --muted:#888; --shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+body { background:var(--bg); font-family:-apple-system,'Segoe UI',sans-serif; color:var(--black); }
+
+.topbar {
+  background:var(--black); color:white;
+  padding:14px 20px; display:flex; align-items:center; justify-content:space-between;
+}
+.topbar h1 { font-size:18px; font-weight:900; }
+.topbar span { font-size:12px; color:#aaa; }
+
+/* AUTH */
+#auth-screen {
+  display:flex; align-items:center; justify-content:center;
+  min-height:100vh; padding:20px;
+}
+.auth-box {
+  background:var(--white); border-radius:20px; padding:32px;
+  box-shadow:var(--shadow); width:100%; max-width:360px; text-align:center;
+}
+.auth-box h2 { font-size:22px; font-weight:900; margin-bottom:8px; }
+.auth-box p { color:var(--muted); font-size:14px; margin-bottom:20px; }
+.auth-input {
+  width:100%; padding:14px; border:1.5px solid var(--border);
+  border-radius:12px; font-size:16px; margin-bottom:12px; outline:none;
+}
+.auth-input:focus { border-color:var(--black); }
+.auth-btn {
+  width:100%; padding:14px; background:var(--black); color:white;
+  border:none; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer;
+}
+
+/* MAIN */
+#main-screen { display:none; }
+
+.stats {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+  padding:16px;
+}
+.stat-card {
+  background:var(--white); border-radius:14px; padding:14px;
+  box-shadow:var(--shadow); text-align:center;
+}
+.stat-num { font-size:24px; font-weight:900; color:var(--accent); }
+.stat-label { font-size:11px; color:var(--muted); margin-top:2px; font-weight:600; }
+
+.section { padding:0 16px 16px; }
+.section-hd {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:12px;
+}
+.section-hd h2 { font-size:16px; font-weight:800; }
+.add-btn {
+  background:var(--accent); color:white; border:none;
+  padding:8px 16px; border-radius:20px; font-size:13px;
+  font-weight:700; cursor:pointer;
+}
+
+/* FORM */
+.form-card {
+  background:var(--white); border-radius:16px;
+  padding:20px; box-shadow:var(--shadow); margin-bottom:16px;
+  display:none;
+}
+.form-card.open { display:block; }
+.form-card h3 { font-size:16px; font-weight:800; margin-bottom:16px; }
+.field { margin-bottom:12px; }
+.field label { display:block; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:5px; }
+.field input, .field select {
+  width:100%; padding:12px; border:1.5px solid var(--border);
+  border-radius:10px; font-size:14px; outline:none; background:white;
+}
+.field input:focus, .field select:focus { border-color:var(--black); }
+
+.img-preview {
+  width:100%; aspect-ratio:2; border-radius:10px;
+  background:#f0ede9; margin-top:8px; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--muted); font-size:13px;
+}
+.img-preview img { width:100%; height:100%; object-fit:cover; }
+
+.form-actions { display:flex; gap:8px; margin-top:16px; }
+.save-btn {
+  flex:1; padding:13px; background:var(--black); color:white;
+  border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer;
+}
+.cancel-btn {
+  padding:13px 20px; border:1.5px solid var(--border); border-radius:10px;
+  background:white; font-size:15px; font-weight:700; cursor:pointer;
+}
+
+/* PRODUCT LIST */
+.prod-item {
+  background:var(--white); border-radius:14px;
+  display:flex; align-items:center; gap:12px;
+  padding:12px; margin-bottom:10px; box-shadow:var(--shadow);
+}
+.prod-thumb {
+  width:60px; height:60px; border-radius:10px;
+  object-fit:cover; background:#f0ede9; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; font-size:28px;
+}
+.prod-thumb img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+.prod-info { flex:1; min-width:0; }
+.prod-name { font-size:14px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.prod-meta { font-size:12px; color:var(--muted); margin-top:2px; }
+.prod-price { font-size:14px; font-weight:900; color:var(--accent); }
+.prod-actions { display:flex; gap:6px; }
+.edit-btn, .del-btn {
+  padding:7px 12px; border-radius:8px; border:none;
+  font-size:12px; font-weight:700; cursor:pointer;
+}
+.edit-btn { background:#f0ede9; color:var(--black); }
+.del-btn { background:#ffe5e5; color:var(--accent); }
+
+/* ORDERS */
+.order-item {
+  background:var(--white); border-radius:14px;
+  padding:14px; margin-bottom:10px; box-shadow:var(--shadow);
+}
+.order-hd { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.order-id { font-size:12px; color:var(--muted); font-weight:600; }
+.order-status {
+  font-size:11px; font-weight:700; padding:3px 10px;
+  border-radius:10px;
+}
+.status-new { background:#FEF3C7; color:#D97706; }
+.status-done { background:#DCFCE7; color:#16A34A; }
+.order-name { font-size:15px; font-weight:800; }
+.order-info { font-size:13px; color:var(--muted); margin-top:3px; }
+.order-total { font-size:15px; font-weight:900; color:var(--accent); margin-top:6px; }
+.done-btn {
+  width:100%; margin-top:10px; padding:10px; background:var(--green); color:white;
+  border:none; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer;
+}
+
+/* TABS */
+.tabs { display:flex; border-bottom:1px solid var(--border); background:var(--white); }
+.tab { flex:1; padding:13px; text-align:center; font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; }
+.tab.active { color:var(--black); border-color:var(--black); }
+
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+.empty { text-align:center; padding:40px 20px; color:var(--muted); }
+.empty .icon { font-size:40px; margin-bottom:8px; }
+
+/* TOAST */
+.toast {
+  position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(10px);
+  background:var(--black); color:white; padding:10px 20px;
+  border-radius:20px; font-size:13px; font-weight:600;
+  opacity:0; transition:all 0.25s; z-index:999; pointer-events:none;
+}
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <h2>🔐 Admin Panel</h2>
+    <p>SophiaShop boshqaruv paneli</p>
+    <input class="auth-input" id="pwd" type="password" placeholder="Parol" onkeydown="if(event.key==='Enter')login()">
+    <button class="auth-btn" onclick="login()">Kirish</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main-screen">
+  <div class="topbar">
+    <h1>SophiaShop Admin</h1>
+    <span id="top-stats">0 mahsulot</span>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('products')">🎽 Mahsulotlar</div>
+    <div class="tab" onclick="switchTab('orders')">📦 Buyurtmalar</div>
+  </div>
+
+  <!-- PRODUCTS TAB -->
+  <div class="tab-content active" id="tab-products">
+    <div class="stats">
+      <div class="stat-card"><div class="stat-num" id="s-total">0</div><div class="stat-label">Mahsulot</div></div>
+      <div class="stat-card"><div class="stat-num" id="s-orders">0</div><div class="stat-label">Buyurtma</div></div>
+      <div class="stat-card"><div class="stat-num" id="s-revenue">0</div><div class="stat-label">Daromad</div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-hd">
+        <h2>Mahsulotlar</h2>
+        <button class="add-btn" onclick="openForm()">+ Qo'shish</button>
+      </div>
+
+      <!-- ADD/EDIT FORM -->
+      <div class="form-card" id="prod-form">
+        <h3 id="form-title">Mahsulot qo'shish</h3>
+        <input type="hidden" id="edit-id">
+        <div class="field">
+          <label>Mahsulot nomi</label>
+          <input id="f-name" placeholder="Masalan: Anime Nezuko">
+        </div>
+        <div class="field">
+          <label>Narx (so'm)</label>
+          <input id="f-price" type="number" placeholder="73000">
+        </div>
+        <div class="field">
+          <label>Kategoriya</label>
+          <select id="f-cat">
+            <option value="anime">Anime</option>
+            <option value="sport">Sport</option>
+            <option value="logo">Logo</option>
+            <option value="nature">Tabiat</option>
+            <option value="other">Boshqa</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Rasm URL (Uzumdan nusxalang)</label>
+          <input id="f-url" placeholder="https://..." oninput="previewImg()">
+          <div class="img-preview" id="img-preview">
+            <span>Rasm URL kiriting — ko'rinadi</span>
+          </div>
+        </div>
+        <div class="field">
+          <label>Emoji (ixtiyoriy)</label>
+          <input id="f-emoji" placeholder="👕" maxlength="2">
+        </div>
+        <div class="form-actions">
+          <button class="save-btn" onclick="saveProduct()">Saqlash</button>
+          <button class="cancel-btn" onclick="closeForm()">Bekor</button>
+        </div>
+      </div>
+
+      <div id="prod-list"></div>
+    </div>
+  </div>
+
+  <!-- ORDERS TAB -->
+  <div class="tab-content" id="tab-orders">
+    <div class="section" style="padding-top:16px;">
+      <div id="orders-list"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ADMIN_PWD = 'sophia2024'; // O'zgartiring!
+const API = ''; // deploy qilganda to'ldiriladi
+
+let products = [];
+let orders = [];
+let editingId = null;
+
+// ===== AUTH =====
+function login() {
+  const pwd = document.getElementById('pwd').value;
+  if (pwd === ADMIN_PWD) {
+    document.getElementById('auth-screen').style.display = 'none';
+    document.getElementById('main-screen').style.display = 'block';
+    loadAll();
+  } else {
+    showToast('❌ Noto\'g\'ri parol!');
+    document.getElementById('pwd').value = '';
+  }
+}
+
+// ===== DATA =====
+async function loadAll() {
+  await Promise.all([loadProducts(), loadOrders()]);
+}
+
+async function loadProducts() {
+  try {
+    const r = await fetch(API + '/api/products');
+    products = await r.json();
+  } catch { products = JSON.parse(localStorage.getItem('ss_products')||'[]'); }
+  renderProducts();
+  updateStats();
+}
+
+async function loadOrders() {
+  try {
+    const r = await fetch(API + '/api/orders');
+    orders = await r.json();
+  } catch { orders = JSON.parse(localStorage.getItem('ss_orders')||'[]'); }
+  renderOrders();
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById('s-total').textContent = products.length;
+  document.getElementById('s-orders').textContent = orders.length;
+  const rev = orders.reduce((s,o) => s+(o.total||0), 0);
+  document.getElementById('s-revenue').textContent = rev > 0 ? (rev/1000).toFixed(0)+'K' : '0';
+  document.getElementById('top-stats').textContent = products.length + ' mahsulot';
+}
+
+// ===== PRODUCTS =====
+function renderProducts() {
+  const el = document.getElementById('prod-list');
+  if (!products.length) {
+    el.innerHTML = `<div class="empty"><div class="icon">🎽</div><p>Hali mahsulot yo'q.<br>+ Qo'shish tugmasini bosing!</p></div>`;
+    return;
+  }
+  el.innerHTML = products.map(p => `
+    <div class="prod-item">
+      <div class="prod-thumb">
+        ${p.image_url
+          ? `<img src="${p.image_url}" onerror="this.style.display='none'">`
+          : (p.emoji||'👕')}
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-meta">${catLabel(p.category)}</div>
+        <div class="prod-price">${Number(p.price).toLocaleString()} so'm</div>
+      </div>
+      <div class="prod-actions">
+        <button class="edit-btn" onclick="editProduct(${p.id})">✏️</button>
+        <button class="del-btn" onclick="deleteProduct(${p.id})">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function catLabel(c) {
+  return {anime:'Anime',sport:'Sport',logo:'Logo',nature:'Tabiat',other:'Boshqa'}[c]||c;
+}
+
+function openForm(reset=true) {
+  if (reset) {
+    editingId = null;
+    document.getElementById('form-title').textContent = 'Mahsulot qo\'shish';
+    document.getElementById('edit-id').value = '';
+    ['f-name','f-price','f-url','f-emoji'].forEach(id => document.getElementById(id).value='');
+    document.getElementById('f-cat').value = 'anime';
+    document.getElementById('img-preview').innerHTML = '<span>Rasm URL kiriting — ko\'rinadi</span>';
+  }
+  document.getElementById('prod-form').classList.add('open');
+  document.getElementById('prod-form').scrollIntoView({behavior:'smooth'});
+}
+
+function closeForm() { document.getElementById('prod-form').classList.remove('open'); editingId=null; }
+
+function previewImg() {
+  const url = document.getElementById('f-url').value.trim();
+  const prev = document.getElementById('img-preview');
+  if (!url) { prev.innerHTML='<span>Rasm URL kiriting — ko\'rinadi</span>'; return; }
+  prev.innerHTML = `<img src="${url}" onerror="this.parentNode.innerHTML='<span>❌ Rasm yuklanmadi</span>'">`;
+}
+
+function editProduct(id) {
+  const p = products.find(x => x.id===id);
+  if (!p) return;
+  editingId = id;
+  document.getElementById('form-title').textContent = 'Mahsulotni tahrirlash';
+  document.getElementById('f-name').value = p.name||'';
+  document.getElementById('f-price').value = p.price||'';
+  document.getElementById('f-cat').value = p.category||'other';
+  document.getElementById('f-url').value = p.image_url||'';
+  document.getElementById('f-emoji').value = p.emoji||'';
+  previewImg();
+  openForm(false);
+}
+
+async function saveProduct() {
+  const name = document.getElementById('f-name').value.trim();
+  const price = document.getElementById('f-price').value;
+  const category = document.getElementById('f-cat').value;
+  const image_url = document.getElementById('f-url').value.trim();
+  const emoji = document.getElementById('f-emoji').value.trim()||'👕';
+  if (!name||!price) { showToast('⚠️ Nom va narxni kiriting!'); return; }
+
+  const prod = { name, price:Number(price), category, image_url, emoji };
+
+  try {
+    if (editingId) {
+      await fetch(API+'/api/products/'+editingId, {method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(prod)});
+    } else {
+      await fetch(API+'/api/products', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(prod)});
+    }
+  } catch {
+    // offline fallback
+    if (editingId) {
+      const idx = products.findIndex(p=>p.id===editingId);
+      if (idx>-1) products[idx] = {...products[idx],...prod};
+    } else {
+      products.push({...prod, id: Date.now()});
+    }
+    localStorage.setItem('ss_products', JSON.stringify(products));
+  }
+
+  closeForm();
+  await loadProducts();
+  showToast(editingId ? '✅ Tahrirlandi!' : '✅ Qo\'shildi!');
+}
+
+async function deleteProduct(id) {
+  if (!confirm('O\'chirishni tasdiqlaysizmi?')) return;
+  try {
+    await fetch(API+'/api/products/'+id, {method:'DELETE'});
+  } catch {
+    products = products.filter(p=>p.id!==id);
+    localStorage.setItem('ss_products', JSON.stringify(products));
+  }
+  await loadProducts();
+  showToast('🗑 O\'chirildi!');
+}
+
+// ===== ORDERS =====
+function renderOrders() {
+  const el = document.getElementById('orders-list');
+  if (!orders.length) {
+    el.innerHTML = `<div class="empty"><div class="icon">📦</div><p>Hali buyurtma yo'q</p></div>`;
+    return;
+  }
+  el.innerHTML = [...orders].reverse().map(o => `
+    <div class="order-item">
+      <div class="order-hd">
+        <span class="order-id">#${o.id}</span>
+        <span class="order-status ${o.done?'status-done':'status-new'}">${o.done?'✅ Bajarildi':'🔔 Yangi'}</span>
+      </div>
+      <div class="order-name">${o.name}</div>
+      <div class="order-info">📞 ${o.phone} · 📍 ${o.city}</div>
+      <div class="order-info" style="margin-top:4px;">🏠 ${o.address} · 💳 ${o.pay?.toUpperCase()}</div>
+      <div class="order-info" style="margin-top:6px;">${(o.cart||[]).map(i=>`${i.name} (${i.size}) x${i.qty}`).join(', ')}</div>
+      <div class="order-total">Jami: ${Number(o.total||0).toLocaleString()} so'm</div>
+      ${!o.done ? `<button class="done-btn" onclick="markDone(${o.id})">✅ Bajarildi deb belgilash</button>` : ''}
+    </div>
+  `).join('');
+}
+
+async function markDone(id) {
+  try {
+    await fetch(API+'/api/orders/'+id+'/done', {method:'PUT'});
+  } catch {
+    const o = orders.find(x=>x.id===id);
+    if (o) o.done = true;
+    localStorage.setItem('ss_orders', JSON.stringify(orders));
+  }
+  await loadOrders();
+  showToast('✅ Belgilandi!');
+}
+
+// ===== TABS =====
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const names = ['products','orders'];
+    t.classList.toggle('active', names[i]===name);
+  });
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
