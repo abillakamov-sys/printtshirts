@@ -8,149 +8,125 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#0d0d0d;--card:#181818;--white:#fff;--black:#111;
-  --accent:#ff2d55;--accent2:#ff6b35;--muted:#666;
-  --border:#222;--text:#f0f0f0;
+  --bg:#f5f5f5;--white:#fff;--black:#1a1a2e;
+  --accent:#6c63ff;--red:#ff4757;
+  --muted:#999;--border:#e8e8e8;--text:#222;
 }
-body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Display','Segoe UI',sans-serif;min-height:100vh;padding-bottom:80px;overflow-x:hidden}
-
-/* HEADER */
-.hdr{position:sticky;top:0;z-index:100;background:rgba(13,13,13,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:20px;font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,#ff2d55,#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.cart-btn{display:flex;align-items:center;gap:6px;background:var(--accent);color:white;border:none;padding:9px 16px;border-radius:22px;cursor:pointer;font-size:13px;font-weight:700;transition:transform .15s}
-.cart-btn:active{transform:scale(.95)}
-.cbadge{background:white;color:var(--accent);font-size:10px;font-weight:900;padding:2px 6px;border-radius:10px;display:none}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Display','Segoe UI',sans-serif;min-height:100vh;padding-bottom:80px}
+.hdr{position:sticky;top:0;z-index:100;background:var(--accent);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(108,99,255,.3)}
+.logo{font-size:20px;font-weight:900;color:white;letter-spacing:-0.5px}
+.logo span{color:#ffd700}
+.cart-btn{display:flex;align-items:center;gap:6px;background:white;color:var(--accent);border:none;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:800}
+.cbadge{background:var(--red);color:white;font-size:10px;font-weight:900;padding:2px 6px;border-radius:10px;display:none}
 .cbadge.on{display:inline-block}
-
-/* HERO */
-.hero{margin:12px;border-radius:20px;background:linear-gradient(135deg,#1a0a0f,#0d1a2d);padding:20px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(255,45,85,.3),transparent 70%);border-radius:50%}
-.hero h1{font-size:26px;font-weight:900;line-height:1.1;margin-bottom:6px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,#ff2d55,#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{font-size:13px;color:#aaa}
-.hero-tags{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.htag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:#ddd;font-size:11px;font-weight:600;padding:5px 10px;border-radius:12px}
-
-/* SEARCH */
-.search-wrap{padding:10px 14px}
-.search-inp{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 16px;border-radius:16px;font-size:14px;outline:none}
-.search-inp::placeholder{color:var(--muted)}
-.search-inp:focus{border-color:var(--accent)}
-
-/* FILTERS */
-.filters{display:flex;gap:8px;padding:0 14px 12px;overflow-x:auto;scrollbar-width:none}
+.hero{background:linear-gradient(135deg,var(--accent),#a855f7);padding:18px 16px;color:white}
+.hero h1{font-size:22px;font-weight:900;line-height:1.2;margin-bottom:4px}
+.hero h1 span{color:#ffd700}
+.hero p{font-size:12px;opacity:.85;margin-bottom:10px}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap}
+.htag{background:rgba(255,255,255,.2);color:white;font-size:11px;font-weight:600;padding:4px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.3)}
+.search-wrap{padding:10px 12px;background:white;border-bottom:1px solid var(--border)}
+.search-box{display:flex;align-items:center;background:var(--bg);border-radius:12px;padding:10px 14px;gap:8px}
+.search-box input{flex:1;background:none;border:none;outline:none;font-size:14px;color:var(--text)}
+.search-box input::placeholder{color:var(--muted)}
+.filters{display:flex;gap:8px;padding:10px 12px;overflow-x:auto;scrollbar-width:none;background:white;border-bottom:1px solid var(--border)}
 .filters::-webkit-scrollbar{display:none}
-.fbtn{white-space:nowrap;padding:8px 14px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.fbtn{white-space:nowrap;padding:7px 14px;border-radius:16px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
 .fbtn.active{background:var(--accent);color:white;border-color:var(--accent)}
-
-/* MASONRY GRID — Pinterest */
-.masonry{columns:2;gap:10px;padding:0 10px}
-.mcard{break-inside:avoid;margin-bottom:10px;border-radius:16px;overflow:hidden;background:var(--card);cursor:pointer;transition:transform .2s;border:1px solid var(--border)}
-.mcard:active{transform:scale(.97)}
-.mcard img{width:100%;display:block;object-fit:cover}
-.mcard .ph{width:100%;display:flex;align-items:center;justify-content:center;background:#1e1e1e;font-size:56px}
-.mcard .ph.tall{aspect-ratio:.8}
-.mcard .ph.sq{aspect-ratio:1}
-.mcard-body{padding:10px}
-.mcard-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3}
-.mcard-price{font-size:15px;font-weight:900;background:linear-gradient(135deg,#ff2d55,#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.mcard-sizes{display:flex;gap:3px;margin-top:5px;flex-wrap:wrap}
-.msz{font-size:9px;color:var(--muted);background:var(--border);padding:2px 5px;border-radius:4px;font-weight:600}
-.mcard-tag{display:inline-block;margin-top:6px;font-size:10px;color:var(--accent);font-weight:700;background:rgba(255,45,85,.1);padding:2px 7px;border-radius:8px}
-
-.empty-g{text-align:center;padding:60px 20px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px;background:var(--border)}
+.card{background:var(--white);cursor:pointer;transition:transform .15s;position:relative}
+.card:active{transform:scale(.98)}
+.card-img-wrap{position:relative;aspect-ratio:.85;overflow:hidden;background:#f0f0f0}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover}
+.card-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:60px;background:#f0f0f0}
+.card-fav{position:absolute;top:8px;right:8px;width:28px;height:28px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.card-body{padding:8px 10px 12px}
+.card-name{font-size:12px;color:var(--text);margin-bottom:4px;line-height:1.3;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-price{font-size:16px;font-weight:900;color:var(--accent)}
+.card-rating{display:flex;align-items:center;gap:3px;margin-top:4px;font-size:11px;color:var(--muted)}
+.card-sizes{display:flex;gap:3px;margin-top:5px;flex-wrap:wrap}
+.csz{font-size:9px;color:var(--muted);border:1px solid var(--border);padding:2px 5px;border-radius:4px;font-weight:600}
+.empty-g{text-align:center;padding:60px 20px;color:var(--muted);grid-column:1/-1;background:white}
 .empty-g .ei{font-size:48px;margin-bottom:10px}
-
-/* PAGES */
-.page{display:none;padding:14px}
+.page{display:none}
 .page.show{display:block}
-.back-btn{background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;display:flex;align-items:center;gap:5px;margin-bottom:16px;padding:0;font-weight:600}
-.pg-title{font-size:22px;font-weight:900;margin-bottom:16px}
-
-/* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:300;align-items:flex-end}
+.back-btn{display:flex;align-items:center;gap:6px;background:none;border:none;color:var(--accent);font-size:14px;cursor:pointer;padding:14px 16px;font-weight:700}
+.pg-title{font-size:20px;font-weight:900;padding:0 16px 14px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:flex-end}
 .overlay.open{display:flex}
-.modal{background:var(--card);border-radius:24px 24px 0 0;width:100%;max-height:92vh;overflow-y:auto;animation:up .28s cubic-bezier(.22,1,.36,1)}
+.modal{background:white;border-radius:24px 24px 0 0;width:100%;max-height:92vh;overflow-y:auto;animation:up .28s cubic-bezier(.22,1,.36,1)}
 @keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.mhandle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:12px auto}
-.m-img{width:100%;max-height:320px;object-fit:cover;background:#1e1e1e}
-.m-img-ph{width:100%;aspect-ratio:1;background:#1e1e1e;display:flex;align-items:center;justify-content:center;font-size:100px}
-.mbody{padding:16px}
-.m-name{font-size:21px;font-weight:900;margin-bottom:4px}
-.m-price{font-size:26px;font-weight:900;background:linear-gradient(135deg,#ff2d55,#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px}
-.lbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+.mhandle{width:36px;height:4px;background:#ddd;border-radius:2px;margin:12px auto}
+.gallery{position:relative;overflow:hidden;touch-action:pan-y}
+.gallery-slides{display:flex;transition:transform .3s ease}
+.gslide{min-width:100%;aspect-ratio:.9;object-fit:cover;background:#f0f0f0}
+.gslide-ph{min-width:100%;aspect-ratio:.9;display:flex;align-items:center;justify-content:center;font-size:90px;background:#f0f0f0}
+.gdots{display:flex;justify-content:center;gap:5px;padding:8px}
+.gdot{width:6px;height:6px;border-radius:50%;background:#ddd;cursor:pointer;transition:all .2s}
+.gdot.active{background:var(--accent);width:18px;border-radius:3px}
+.mbody{padding:14px 16px 30px}
+.m-brand{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.m-name{font-size:18px;font-weight:900;margin-bottom:4px;line-height:1.2}
+.m-price{font-size:24px;font-weight:900;color:var(--accent);margin-bottom:6px}
+.m-rating{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);margin-bottom:14px}
+.m-desc{font-size:13px;color:#555;line-height:1.6;margin-bottom:16px;background:var(--bg);border-radius:10px;padding:12px}
+.lbl{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
 .szrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.szopt{padding:10px 18px;border-radius:10px;border:1.5px solid var(--border);background:transparent;color:var(--text);font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.szopt{padding:9px 16px;border-radius:8px;border:1.5px solid var(--border);background:white;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;transition:all .15s}
 .szopt.active{background:var(--accent);color:white;border-color:var(--accent)}
-.add-btn{width:100%;padding:16px;background:linear-gradient(135deg,#ff2d55,#ff6b35);color:white;font-size:16px;font-weight:800;border:none;border-radius:14px;cursor:pointer}
+.add-btn{width:100%;padding:15px;background:var(--accent);color:white;font-size:15px;font-weight:800;border:none;border-radius:14px;cursor:pointer}
 .add-btn:disabled{opacity:.35;cursor:not-allowed}
-
-/* CART */
-.citem{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:14px;padding:12px;margin-bottom:10px;border:1px solid var(--border)}
-.ci-img{width:58px;height:58px;border-radius:10px;object-fit:cover;background:#1e1e1e;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.cart-wrap{padding:12px}
+.citem{display:flex;align-items:center;gap:12px;background:white;border-radius:14px;padding:12px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.ci-img{width:60px;height:60px;border-radius:10px;object-fit:cover;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;overflow:hidden}
 .ci-info{flex:1;min-width:0}
 .ci-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ci-sub{font-size:12px;color:var(--muted);margin-top:2px}
 .ci-price{font-size:14px;font-weight:900;color:var(--accent);margin-top:4px}
-.ci-rm{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;padding:4px;flex-shrink:0}
-.sbox{background:var(--card);border-radius:14px;padding:16px;margin:14px 0;border:1px solid var(--border)}
+.ci-rm{background:none;border:none;color:#ccc;font-size:20px;cursor:pointer;padding:4px;flex-shrink:0}
+.sbox{background:white;border-radius:14px;padding:16px;margin:10px 0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .srow{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:8px}
-.srow.tot{font-size:18px;font-weight:900;color:var(--text);padding-top:10px;border-top:1px solid var(--border);margin-top:4px}
-.prim-btn{width:100%;padding:16px;background:linear-gradient(135deg,#ff2d55,#ff6b35);color:white;font-size:16px;font-weight:800;border:none;border-radius:14px;cursor:pointer}
-.prim-btn:active{opacity:.85}
-
-/* ORDER FORM */
-.fld{margin-bottom:14px}
-.fld label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.fld input,.fld select,.fld textarea{width:100%;padding:13px;background:var(--card);border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-size:14px;outline:none;-webkit-appearance:none;font-family:inherit}
-.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--accent)}
-.fld select option{background:#1a1a1a}
-
-/* BTS PUNKTLAR */
-.bts-section{margin-bottom:20px}
-.bts-title{font-size:14px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.bts-search{width:100%;padding:11px 14px;background:var(--card);border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-size:13px;outline:none;margin-bottom:10px}
-.bts-list{max-height:250px;overflow-y:auto;border-radius:12px;border:1px solid var(--border)}
-.bts-item{padding:12px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
-.bts-item:last-child{border-bottom:none}
-.bts-item:hover,.bts-item.sel{background:rgba(255,45,85,.1)}
-.bts-item.sel{border-left:3px solid var(--accent)}
-.bts-name{font-size:13px;font-weight:700;color:var(--text)}
-.bts-addr{font-size:11px;color:var(--muted);margin-top:2px}
-.bts-time{font-size:10px;color:var(--accent);margin-top:2px;font-weight:600}
-.bts-selected{background:rgba(255,45,85,.08);border:1.5px solid var(--accent);border-radius:12px;padding:12px;margin-top:8px;display:none}
-.bts-selected.on{display:block}
-
-/* PAY */
+.srow.tot{font-size:17px;font-weight:900;color:var(--text);padding-top:10px;border-top:1px solid var(--border);margin-top:4px}
+.prim-btn{width:100%;padding:15px;background:var(--accent);color:white;font-size:15px;font-weight:800;border:none;border-radius:14px;cursor:pointer}
+.order-wrap{padding:12px}
+.fld{margin-bottom:12px}
+.fld label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.fld input,.fld select,.fld textarea{width:100%;padding:13px;background:white;border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-size:14px;outline:none;-webkit-appearance:none;font-family:inherit}
+.fld input:focus,.fld select:focus{border-color:var(--accent)}
 .pay-row{display:flex;gap:8px}
-.popt{flex:1;padding:12px;border:1.5px solid var(--border);border-radius:12px;background:transparent;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
+.popt{flex:1;padding:11px;border:1.5px solid var(--border);border-radius:12px;background:white;color:var(--text);font-size:13px;font-weight:700;cursor:pointer;text-align:center;transition:all .15s}
 .popt.active{background:var(--accent);color:white;border-color:var(--accent)}
-
-/* SUCCESS */
-.suc-wrap{text-align:center;padding:50px 20px}
-.suc-icon{font-size:72px;margin-bottom:16px}
-.suc-title{font-size:24px;font-weight:900;margin-bottom:8px}
-.suc-txt{color:var(--muted);font-size:15px;line-height:1.6}
-.suc-bts{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin:20px 0;text-align:left}
-.suc-bts-t{font-size:12px;color:var(--muted);margin-bottom:4px;font-weight:600}
-.suc-bts-v{font-size:14px;font-weight:700}
-
-/* TOAST */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--card);color:var(--text);border:1px solid var(--border);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .25s;z-index:999;white-space:nowrap;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.bts-wrap{background:white;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.bts-wrap h3{font-size:14px;font-weight:800;margin-bottom:10px;color:var(--black)}
+.bts-search{width:100%;padding:10px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;outline:none;margin-bottom:8px}
+.bts-search:focus{border-color:var(--accent)}
+.bts-list{max-height:220px;overflow-y:auto;border-radius:10px;border:1px solid var(--border)}
+.bitem{padding:11px 13px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+.bitem:last-child{border-bottom:none}
+.bitem.sel{background:rgba(108,99,255,.08);border-left:3px solid var(--accent)}
+.bitem-name{font-size:13px;font-weight:700;color:var(--text)}
+.bitem-addr{font-size:11px;color:var(--muted);margin-top:2px}
+.bitem-time{font-size:10px;color:var(--accent);margin-top:2px;font-weight:600}
+.sel-bts{background:rgba(108,99,255,.06);border:1.5px solid var(--accent);border-radius:10px;padding:11px;margin-top:8px;display:none}
+.sel-bts.on{display:block}
+.suc-wrap{text-align:center;padding:40px 20px}
+.suc-icon{font-size:70px;margin-bottom:14px}
+.suc-title{font-size:22px;font-weight:900;margin-bottom:6px}
+.suc-txt{color:var(--muted);font-size:14px;line-height:1.6}
+.suc-bts-box{background:white;border-radius:14px;padding:14px;margin:16px 0;text-align:left;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--black);color:white;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .25s;z-index:999;white-space:nowrap;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
-
 <div class="hdr">
-  <div class="logo">sophiashop</div>
-  <button class="cart-btn" onclick="goCart()">🛒 <span id="badge" class="cbadge">0</span></button>
+  <div class="logo">sophia<span>shop</span></div>
+  <button class="cart-btn" onclick="goCart()">🛒 <span class="cbadge" id="badge">0</span></button>
 </div>
 
-<!-- CATALOG -->
 <div id="p-cat">
   <div class="hero">
-    <h1>Original<br><em>print futbolkalar</em></h1>
+    <h1>Print <span>futbolkalar</span> 🎽</h1>
     <p>🚀 BTS orqali 1-2 kunda yetkazish</p>
     <div class="hero-tags">
       <span class="htag">✨ 38 ta dizayn</span>
@@ -158,96 +134,104 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Di
       <span class="htag">💳 Click · Payme</span>
     </div>
   </div>
-
   <div class="search-wrap">
-    <input class="search-inp" id="search-inp" placeholder="🔍 Qidirish..." oninput="doSearch(this.value)">
+    <div class="search-box">
+      <span>🔍</span>
+      <input id="sinp" placeholder="Futbolka qidirish..." oninput="doSearch(this.value)">
+    </div>
   </div>
-
   <div class="filters">
     <button class="fbtn active" onclick="doFilter('all',this)">Barchasi</button>
     <button class="fbtn" onclick="doFilter('anime',this)">🎌 Anime</button>
-    <button class="fbtn" onclick="doFilter('sport',this)">⚽ Sport</button>
-    <button class="fbtn" onclick="doFilter('logo',this)">🔥 Logo</button>
+    <button class="fbtn" onclick="doFilter('popular',this)">🔥 Mashhurlar</button>
+    <button class="fbtn" onclick="doFilter('football',this)">⚽ Futbol</button>
     <button class="fbtn" onclick="doFilter('nature',this)">🌿 Tabiat</button>
-    <button class="fbtn" onclick="doFilter('other',this)">✨ Boshqa</button>
+    <button class="fbtn" onclick="doFilter('cartoon',this)">🎭 Multfilm</button>
+    <button class="fbtn" onclick="doFilter('quotes',this)">💬 Quotes</button>
   </div>
-
-  <div class="masonry" id="grid"></div>
+  <div class="grid" id="grid"></div>
 </div>
 
-<!-- CART PAGE -->
 <div class="page" id="p-cart">
   <button class="back-btn" onclick="go('p-cat')">← Orqaga</button>
   <div class="pg-title">Savat 🛒</div>
-  <div id="cart-list"></div>
+  <div class="cart-wrap" id="cart-list"></div>
 </div>
 
-<!-- ORDER PAGE -->
 <div class="page" id="p-order">
   <button class="back-btn" onclick="go('p-cart')">← Orqaga</button>
   <div class="pg-title">Buyurtma 📦</div>
-
-  <div class="fld"><label>Ismingiz</label><input id="f-name" placeholder="Sardor Rahimov" type="text"></div>
-  <div class="fld"><label>Telefon</label><input id="f-phone" placeholder="+998 90 000 00 00" type="tel"></div>
-  <div class="fld"><label>Viloyat</label>
-    <select id="f-region" onchange="filterBTS()">
-      <option value="">Viloyatni tanlang...</option>
-      <option>Toshkent shahri</option><option>Toshkent viloyati</option>
-      <option>Samarqand</option><option>Buxoro</option><option>Andijon</option>
-      <option>Farg'ona</option><option>Namangan</option><option>Qashqadaryo</option>
-      <option>Surxondaryo</option><option>Xorazm</option><option>Navoiy</option>
-      <option>Jizzax</option><option>Sirdaryo</option><option>Qoraqalpog'iston</option>
-    </select>
-  </div>
-
-  <!-- BTS PUNKT -->
-  <div class="bts-section">
-    <div class="bts-title">📦 Eng yaqin BTS punktni tanlang</div>
-    <input class="bts-search" id="bts-search" placeholder="🔍 Mahalla, ko'cha..." oninput="searchBTS(this.value)">
-    <div class="bts-list" id="bts-list">
-      <div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">Avval viloyatni tanlang ⬆️</div>
+  <div class="order-wrap">
+    <div class="fld"><label>Ism va Familiya</label><input id="f-name" placeholder="Sardor Rahimov" type="text"></div>
+    <div class="fld"><label>Telefon raqam</label><input id="f-phone" placeholder="+998 90 000 00 00" type="tel"></div>
+    <div class="fld"><label>Viloyat</label>
+      <select id="f-region" onchange="filterBTS()">
+        <option value="">Viloyatni tanlang...</option>
+        <option>Toshkent shahri</option>
+        <option>Toshkent viloyati</option>
+        <option>Samarqand viloyati</option>
+        <option>Buxoro viloyati</option>
+        <option>Andijon viloyati</option>
+        <option>Farg'ona viloyati</option>
+        <option>Namangan viloyati</option>
+        <option>Qashqadaryo viloyati</option>
+        <option>Surxondaryo viloyati</option>
+        <option>Xorazm viloyati</option>
+        <option>Navoiy viloyati</option>
+        <option>Jizzax viloyati</option>
+        <option>Sirdaryo viloyati</option>
+        <option>Qoraqalpog'iston</option>
+      </select>
     </div>
-    <div class="bts-selected" id="bts-selected">
-      <div class="bts-time">✅ Tanlangan BTS punkt:</div>
-      <div class="bts-name" id="sel-bts-name"></div>
-      <div class="bts-addr" id="sel-bts-addr"></div>
+    <div class="bts-wrap">
+      <h3>📦 Eng yaqin BTS punktni tanlang</h3>
+      <input class="bts-search" id="bts-s" placeholder="🔍 Mahalla, tuman, ko'cha..." oninput="searchBTS(this.value)">
+      <div class="bts-list" id="bts-list">
+        <div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">Avval viloyatni tanlang ⬆️</div>
+      </div>
+      <div class="sel-bts" id="sel-bts">
+        <div style="font-size:10px;color:var(--accent);font-weight:700;margin-bottom:4px">✅ Tanlangan punkt:</div>
+        <div style="font-size:13px;font-weight:800" id="sel-bts-name"></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px" id="sel-bts-addr"></div>
+      </div>
     </div>
-  </div>
-
-  <div class="fld">
-    <label>To'lov usuli</label>
-    <div class="pay-row">
-      <button class="popt active" id="pay-click" onclick="selPay('click')">💳 Click</button>
-      <button class="popt" id="pay-payme" onclick="selPay('payme')">💳 Payme</button>
-      <button class="popt" id="pay-cash" onclick="selPay('cash')">💵 Naqd</button>
+    <div class="fld"><label>Shahar yoki Tuman</label><input id="f-city" placeholder="Masalan: Chilonzor tumani, Yunusobod" type="text"></div>
+    <div class="fld">
+      <label>To'lov usuli</label>
+      <div class="pay-row">
+        <button class="popt active" id="pay-click" onclick="selPay('click')">💳 Click</button>
+        <button class="popt" id="pay-payme" onclick="selPay('payme')">💳 Payme</button>
+      </div>
     </div>
+    <div class="fld"><label>Izoh</label><textarea id="f-note" placeholder="Qo'shimcha izoh..." rows="2" style="resize:none"></textarea></div>
+    <button class="prim-btn" onclick="submitOrder()">✅ Buyurtmani tasdiqlash</button>
   </div>
-
-  <div class="fld"><label>Izoh (ixtiyoriy)</label><textarea id="f-note" placeholder="Qo'shimcha izoh..." rows="2" style="resize:none"></textarea></div>
-
-  <button class="prim-btn" onclick="submitOrder()">✅ Buyurtmani tasdiqlash</button>
 </div>
 
-<!-- SUCCESS PAGE -->
 <div class="page" id="p-success">
   <div class="suc-wrap">
     <div class="suc-icon">🎉</div>
     <div class="suc-title">Buyurtma qabul qilindi!</div>
     <div class="suc-txt">Tez orada siz bilan bog'lanamiz</div>
-    <div class="suc-bts" id="suc-bts-info"></div>
-    <div class="suc-txt" style="margin-top:10px">📦 BTS orqali <strong>1-2 kun</strong> ichida yetadi 🚀</div>
-    <button class="prim-btn" style="margin-top:24px" onclick="backShop()">Xarid davom ettirish</button>
+    <div class="suc-bts-box" id="suc-bts-info"></div>
+    <div class="suc-txt">📦 BTS orqali <strong>1-2 kun</strong> ichida yetadi 🚀</div>
+    <button class="prim-btn" style="margin-top:20px" onclick="go('p-cat')">Xarid davom ettirish</button>
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
 <div class="overlay" id="overlay" onclick="closeModal(event)">
   <div class="modal">
     <div class="mhandle"></div>
-    <div id="m-img-wrap"></div>
+    <div class="gallery" id="m-gallery">
+      <div class="gallery-slides" id="m-slides"></div>
+      <div class="gdots" id="m-dots"></div>
+    </div>
     <div class="mbody">
+      <div class="m-brand">SophiaShop</div>
       <div class="m-name" id="m-name"></div>
       <div class="m-price" id="m-price"></div>
+      <div class="m-rating">⭐⭐⭐⭐⭐ 5.0 · Yangi</div>
+      <div class="m-desc" id="m-desc"></div>
       <div class="lbl">Razmer tanlang</div>
       <div class="szrow" id="m-sizes"></div>
       <button class="add-btn" id="m-add" onclick="addCart()" disabled>Razmerni tanlang</button>
@@ -258,126 +242,273 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'SF Pro Di
 <div class="toast" id="toast"></div>
 
 <script>
-const tg = window.Telegram?.WebApp;
+const tg=window.Telegram?.WebApp;
 if(tg){tg.ready();tg.expand();}
-
 const SIZES=['XS','S','M','L','XL','XXL'];
 const DELIVERY=15000;
 const API='';
 
-// BTS punktlar ro'yxati
-const BTS_POINTS=[
-  // TOSHKENT SHAHRI
-  {id:1,region:'Toshkent shahri',name:'YAKKASAROY',addr:'Bobur ko\'chasi 22',time:'24/7',phone:'1230'},
-  {id:2,region:'Toshkent shahri',name:'UCHTEPA',addr:'Lutfiy ko\'cha 2-A uy, 24-kvartal',time:'09:00-20:00',phone:'1230'},
-  {id:3,region:'Toshkent shahri',name:'SHAYXONTOHUR',addr:'Furkat ko\'cha 6, Xadra',time:'24/7',phone:'1230'},
-  {id:4,region:'Toshkent shahri',name:'ALISHER NAVOIY METRO',addr:'Navoiy ko\'chasi 69-b',time:'09:00-18:00',phone:'1230'},
-  {id:5,region:'Toshkent shahri',name:'JANUBIY VOKZAL',addr:'Kichik halqa yo\'li 22A',time:'09:00-18:00',phone:'1230'},
-  {id:6,region:'Toshkent shahri',name:'O\'RIKZOR BOZOR',addr:'O\'rikzor bozor 4-blok 59-do\'kon',time:'09:00-18:00',phone:'1230'},
-  {id:7,region:'Toshkent shahri',name:'CHORSU',addr:'Zayqaynar ko\'cha, 24-qator 431-do\'kon',time:'09:00-18:00',phone:'1230'},
-  {id:8,region:'Toshkent shahri',name:'DEPO MALL',addr:'Katta Kani ko\'cha 22, Depo Mall',time:'09:00-18:00',phone:'1230'},
-  {id:9,region:'Toshkent shahri',name:'FARHOD BOZOR',addr:'Farhod Scopus Avto Mall, 9-qator 215-do\'kon',time:'09:00-18:00',phone:'1230'},
-  {id:10,region:'Toshkent shahri',name:'BUNYODKOR',addr:'Bunyodkor ko\'chasi',time:'09:00-20:00',phone:'1230'},
+// ========== BTS PUNKTLAR (rasmiy manzillar) ==========
+const BTS=[
+  // TOSHKENT SHAHRI — Yakkasaroy tumani
+  {id:1,r:'Toshkent shahri',n:'YAKKASAROY',a:'Bobur ko\'chasi 22 (Tojmahal restorani yonida)',t:'24/7'},
+  {id:2,r:'Toshkent shahri',n:'QUSHBEGI SKLAD',a:'Qushbegi massivi, kichik halqa yo\'li 23-uy',t:'Du-Ju: 09-18, Shan: 09-16'},
+  {id:3,r:'Toshkent shahri',n:'YAKKASAROY 2',a:'Shota Rustaveli ko\'chasi 122-uy, 42-xona (Birodarlik qabristoni yonida)',t:'09:00-18:00'},
+  {id:4,r:'Toshkent shahri',n:'QUSHBEGI PVZ',a:'Qushbegi daxasi 2-uy (Masjid qarshisida)',t:'09:00-20:00'},
+  {id:5,r:'Toshkent shahri',n:'JANUBIY VOKZAL',a:'Kichik halqa yo\'li 22A (IBR zapravka yonida)',t:'09:00-18:00'},
+  {id:6,r:'Toshkent shahri',n:'YAKKASAROY ASKIYA',a:'Shota Rustaveli ko\'cha 55 (Askiya bozor qarshisi)',t:'09:00-18:00'},
+  // Uchtepa tumani
+  {id:7,r:'Toshkent shahri',n:'UCHTEPA',a:'24-kvartal, Lutfiy ko\'cha 2-A (Shirin chorraha)',t:'09:00-20:00'},
+  {id:8,r:'Toshkent shahri',n:'O\'RIKZOR 1',a:'O\'rikzor bozor 4-blok 59-do\'kon',t:'09:00-18:00'},
+  {id:9,r:'Toshkent shahri',n:'FARHOD BOZOR',a:'Farhod Scopus Avto Mall, 2-eshik, 9-qator, 215-do\'kon',t:'09:00-18:00'},
+  {id:10,r:'Toshkent shahri',n:'O\'RIKZOR 2',a:'O\'rikzor bozori, 4-blok 42-2 do\'kon',t:'09:00-18:00'},
+  {id:11,r:'Toshkent shahri',n:'UCHTEPA 2 (EVOS yonida)',a:'12-kvartal, 41-uy (EVOS yonida)',t:'24/7'},
+  {id:12,r:'Toshkent shahri',n:'FARHOD CHORRAHA',a:'Farhod ko\'cha 6a (Havas supermarket yonida)',t:'09:00-18:00'},
+  {id:13,r:'Toshkent shahri',n:'ARCHA KO\'CHA',a:'14-mavze, 14-uy, 13-xonadon (SQB Bank yonida)',t:'09:00-18:00'},
+  {id:14,r:'Toshkent shahri',n:'BESHQAYRAG\'OCH',a:'Beshqayrag\'och ko\'cha 276-uy (Ginekologiya yonida)',t:'09:00-18:00'},
+  {id:15,r:'Toshkent shahri',n:'DEPO MALL',a:'Katta Kani ko\'cha 22 (Depo Mall)',t:'09:00-18:00'},
+  {id:16,r:'Toshkent shahri',n:'BESHQAYRAG\'OCH 2',a:'Manon Uyg\'ur ko\'cha (Beshqayrag\'och chorraha)',t:'09:00-18:00'},
+  // Shayxontohur tumani
+  {id:17,r:'Toshkent shahri',n:'SHAYXONTOHUR (XADRA)',a:'Furkat ko\'cha 6 (Asaka Bank orqasi)',t:'24/7'},
+  {id:18,r:'Toshkent shahri',n:'MALIKA BOZOR',a:'Ko\'rgazma ko\'cha 36-uy (Mahmud kabob ro\'parasida)',t:'Se-Yak: 09-18'},
+  {id:19,r:'Toshkent shahri',n:'HUVAYDO',a:'Huvaydo mahallasi, 14-kv (Onkologiya markazi yonida)',t:'09:00-18:00'},
+  {id:20,r:'Toshkent shahri',n:'IBN SINO',a:'Yoqub Ziyoev ko\'cha 5-uy (Safiya do\'koni)',t:'09:00-18:00'},
+  {id:21,r:'Toshkent shahri',n:'NAVOIY METRO',a:'Navoiy ko\'chasi 69-b (Alisher Navoiy metro)',t:'09:00-18:00'},
+  {id:22,r:'Toshkent shahri',n:'HUVAYDO 2',a:'Beruniy ko\'cha 12-uy (Eco bozor yonida)',t:'09:00-18:00'},
+  {id:23,r:'Toshkent shahri',n:'GULOBOD',a:'Uyg\'ur ko\'cha 4-uy (Xotam moyka)',t:'09:00-18:00'},
+  {id:24,r:'Toshkent shahri',n:'CHORSU KIYIM BOZOR',a:'Zayqaynar ko\'cha, 24-qator 431-do\'kon',t:'Se-Yak: 09-18'},
+  {id:25,r:'Toshkent shahri',n:'CHORSU GOLD SENTR',a:'Chorsu bozor, Gold Sentr 72-do\'kon',t:'Se-Yak: 09-18'},
+  {id:26,r:'Toshkent shahri',n:'TOSHMI CHORRAHA',a:'Jar Ariq ko\'chasi (Ko\'ksaroy hospital yonida)',t:'09:00-18:00'},
+  {id:27,r:'Toshkent shahri',n:'SAMARQAND DARVOZA',a:'Samarqand Darvoza ko\'cha 1-uy (JFA stom)',t:'09:00-18:00'},
+  {id:28,r:'Toshkent shahri',n:'MALIKA BOZOR 2',a:'Malika bozori 2C-blok',t:'Se-Yak: 09-18'},
+  // Olmazor tumani
+  {id:29,r:'Toshkent shahri',n:'OLMAZOR',a:'Talabalar ko\'chasi 81/1 (Kamolaxon supermarket)',t:'09:00-20:00'},
+  {id:30,r:'Toshkent shahri',n:'ESKI SHAHAR',a:'Langar ko\'chasi 76a (Versal to\'yxonasi)',t:'09:00-18:00'},
+  {id:31,r:'Toshkent shahri',n:'QORAQAMISH',a:'Qoraqamish-2 ko\'chasi (Qoraqamish avtodrom)',t:'09:00-18:00'},
+  {id:32,r:'Toshkent shahri',n:'KELES YO\'LI',a:'Keles yo\'li ko\'chasi (Safia yonida)',t:'09:00-18:00'},
+  {id:33,r:'Toshkent shahri',n:'SEBZOR',a:'Sebzor ko\'cha 1-uy (NBU bank yaqinida)',t:'09:00-18:00'},
+  {id:34,r:'Toshkent shahri',n:'SAG\'BON',a:'Sag\'bon ko\'cha 80-uy (Eski Qo\'shtut to\'yxonasi)',t:'09:00-18:00'},
+  {id:35,r:'Toshkent shahri',n:'QORAQAMISH 2',a:'Qoraqamish 2, 8-uy (Alo to\'yxona qarshisi)',t:'09:00-18:00'},
+  {id:36,r:'Toshkent shahri',n:'QORASAROY',a:'Qorasaroy ko\'chasi 2-uy (Olmazor city)',t:'09:00-18:00'},
+  // Sergeli tumani
+  {id:37,r:'Toshkent shahri',n:'SERGELI (MEDIAPARK)',a:'Yangi Sergeli 8A, 3-uy, 74-xona (Mediapark)',t:'09:00-20:00'},
+  {id:38,r:'Toshkent shahri',n:'SERGELI 4-BEKAT',a:'Shokir ariq ko\'cha 100-uy (Ozoda shifo klinikasi)',t:'09:00-20:00'},
+  // Yunusobod tumani
+  {id:39,r:'Toshkent shahri',n:'YUNUSOBOD (SHAXRISTON)',a:'A.Temur ko\'cha 115A (Korzinka qarshisida)',t:'09:00-18:00'},
+  {id:40,r:'Toshkent shahri',n:'UNIVERSAM YUNUSOBOD',a:'Yunusobod 8-kv, 22-uy, 50-xona (Billur to\'yxonasi)',t:'09:00-20:00'},
+  {id:41,r:'Toshkent shahri',n:'OLOY BOZOR',a:'Kashgar mavzesi 1-uy (Oloy bozor ro\'parasi)',t:'09:00-18:00'},
+  {id:42,r:'Toshkent shahri',n:'GIDROMITSENTR',a:'Osiyo ko\'cha 21-uy (Gidromitsentr chorrahasi)',t:'09:00-18:00'},
+  {id:43,r:'Toshkent shahri',n:'MEGA PLANET',a:'11-mavze, 16-uy (Kingsman Sport qarshisida)',t:'09:00-18:00'},
+  {id:44,r:'Toshkent shahri',n:'BODOMZOR',a:'Bog\'ishamol ko\'cha 33A (TATU yonida)',t:'09:00-18:00'},
+  {id:45,r:'Toshkent shahri',n:'SAMPI (TASHGRESS)',a:'TashGRESS mavzesi 21-uy (Sampi Korzinka)',t:'09:00-18:00'},
+  {id:46,r:'Toshkent shahri',n:'TURKISTON METRO',a:'Ahmad Donish ko\'cha 5-uy (Mikro Med Lor)',t:'09:00-18:00'},
+  {id:47,r:'Toshkent shahri',n:'YUNUSOBOD SAMARA',a:'13-mavze, 53-uy (Gamlet kafe yonida)',t:'09:00-18:00'},
+  {id:48,r:'Toshkent shahri',n:'ORIENT BIZNES SENTR',a:'Oloy bozor ko\'cha (Gyote Instituti)',t:'09:00-18:00'},
+  {id:49,r:'Toshkent shahri',n:'XALQARO BIZNES MARKAZI',a:'A.Temur prospekti 107-B',t:'09:00-18:00'},
+  // Mirobod tumani
+  {id:50,r:'Toshkent shahri',n:'MIROBOD',a:'Afrosiab ko\'cha 6 (Grand Trade Biznes Sentr)',t:'09:00-18:00'},
+  {id:51,r:'Toshkent shahri',n:'SHIMOLIY VOKZAL',a:'Oybek ko\'chasi 59-1 uy',t:'09:00-18:00'},
+  {id:52,r:'Toshkent shahri',n:'YANGI QO\'YLIQ',a:'Qo\'yliq ko\'cha (Imperial restorani yonida)',t:'09:00-18:00'},
+  {id:53,r:'Toshkent shahri',n:'SARAKULKA',a:'Mehrjon ko\'cha 45-uy (Dilkash kafe ro\'parasi)',t:'09:00-18:00'},
+  {id:54,r:'Toshkent shahri',n:'RISOVIY BOZOR',a:'Farg\'ona yo\'li ko\'cha (Risoviy bozor)',t:'09:00-18:00'},
+  // Mirzo Ulug\'bek tumani
+  {id:55,r:'Toshkent shahri',n:'MAKSIM GORKIY',a:'Buyuk ipak yo\'li ko\'cha 123 (Sayohat mehmonxona)',t:'09:00-20:00'},
+  {id:56,r:'Toshkent shahri',n:'PARKENT BOZOR',a:'Parkent ko\'cha 11 (Aroma medik bozor ro\'parasi)',t:'09:00-18:00'},
+  {id:57,r:'Toshkent shahri',n:'TTZ',a:'Buyuk Ipak yo\'li 481a (TTZ bozor to\'g\'risida)',t:'09:00-18:00'},
+  {id:58,r:'Toshkent shahri',n:'MIRZO ULUGʻBEK',a:'Kattadarxon ko\'cha 1/8 (Digital Universitet)',t:'09:00-18:00'},
+  {id:59,r:'Toshkent shahri',n:'IT-PARK',a:'Mominova ko\'chasi 7-uy 32 (IT-Park)',t:'09:00-18:00'},
+  {id:60,r:'Toshkent shahri',n:'FERUZA MASSIV',a:'Feruza ko\'cha (Mega school)',t:'09:00-18:00'},
+  {id:61,r:'Toshkent shahri',n:'QORASUV 2',a:'Qorasuv 2 (Qorasuv bozor)',t:'09:00-18:00'},
+  // Yashnobod tumani
+  {id:62,r:'Toshkent shahri',n:'QO\'YLIQ',a:'Farg\'ona yo\'li ko\'cha 4-uy (Korzinka)',t:'09:00-18:00'},
+  {id:63,r:'Toshkent shahri',n:'KADISHEVA',a:'2-Aviasozlar mavzesi 40-uy (Yashnobod to\'yxonasi)',t:'09:00-18:00'},
+  {id:64,r:'Toshkent shahri',n:'MAHTUMQULI',a:'Mahtumquli ko\'cha 117 (Korzinka Aviator)',t:'09:00-18:00'},
+  {id:65,r:'Toshkent shahri',n:'LISUNOVA',a:'Qorasuv ko\'cha 33 (Korzinka)',t:'09:00-18:00'},
   // TOSHKENT VILOYATI
-  {id:11,region:'Toshkent viloyati',name:'KO\'KSAROY',addr:'Toshkent tumani, Ko\'ksaroy AYP, Beltepa betonka',time:'09:00-18:00',phone:'1230'},
-  {id:12,region:'Toshkent viloyati',name:'QUSHBEGI',addr:'Qushbegi massivi, kichik halqa yo\'li 23-uy',time:'09:00-18:00',phone:'1230'},
-  {id:13,region:'Toshkent viloyati',name:'ANGREN',addr:'Angren shahri, markaziy ko\'cha',time:'09:00-18:00',phone:'1230'},
-  {id:14,region:'Toshkent viloyati',name:'CHIRCHIQ',addr:'Chirchiq shahri',time:'09:00-18:00',phone:'1230'},
-  // SAMARQAND
-  {id:15,region:'Samarqand',name:'SAMARQAND MARKAZ',addr:'Registon ko\'chasi, markaziy ofis',time:'09:00-18:00',phone:'1230'},
-  {id:16,region:'Samarqand',name:'SAMARQAND BOZOR',addr:'Siob bozori yaqini',time:'09:00-17:00',phone:'1230'},
-  // BUXORO
-  {id:17,region:'Buxoro',name:'BUXORO MARKAZ',addr:'Buxoro shahri, markaziy ko\'cha',time:'09:00-18:00',phone:'1230'},
-  {id:18,region:'Buxoro',name:'KOGON',addr:'Kogon tumani markazi',time:'09:00-17:00',phone:'1230'},
-  // ANDIJON
-  {id:19,region:'Andijon',name:'ANDIJON MARKAZ',addr:'Andijon shahri, Navro\'z ko\'chasi',time:'09:00-18:00',phone:'1230'},
-  {id:20,region:'Andijon',name:'SHAHRIXON',addr:'Shahrixon tumani, Chinobod ko\'chasi 7-uy',time:'09:00-18:00',phone:'1230'},
-  {id:21,region:'Andijon',name:'ULUGʻNOR',addr:'Ulug\'nor tumani, Shaxrixon ko\'chasi',time:'09:00-18:00',phone:'1230'},
-  // FARG'ONA
-  {id:22,region:'Farg\'ona',name:'FARG\'ONA MARKAZ',addr:'Farg\'ona shahri, Mustaqillik ko\'chasi',time:'09:00-18:00',phone:'1230'},
-  {id:23,region:'Farg\'ona',name:'QO\'QON',addr:'Qo\'qon shahri markazi',time:'09:00-18:00',phone:'1230'},
-  // NAMANGAN
-  {id:24,region:'Namangan',name:'NAMANGAN MARKAZ',addr:'Namangan shahri, Istiqlol ko\'chasi',time:'09:00-18:00',phone:'1230'},
-  // QASHQADARYO
-  {id:25,region:'Qashqadaryo',name:'QARSHI MARKAZ',addr:'Qarshi shahri, markaziy ofis',time:'09:00-18:00',phone:'1230'},
-  // SURXONDARYO
-  {id:26,region:'Surxondaryo',name:'TERMIZ MARKAZ',addr:'Termiz shahri markazi',time:'09:00-18:00',phone:'1230'},
-  {id:27,region:'Surxondaryo',name:'OLTINSOY',addr:'Oltinsoy tumani, Ipoq MFY, Oltindala ko\'chasi 10',time:'09:00-18:00',phone:'+998 93 505 04 27'},
-  // XORAZM
-  {id:28,region:'Xorazm',name:'URGANCH MARKAZ',addr:'Urganch shahri, markaziy ofis',time:'09:00-18:00',phone:'1230'},
-  // NAVOIY
-  {id:29,region:'Navoiy',name:'NAVOIY MARKAZ',addr:'Navoiy shahri, markaziy ko\'cha',time:'09:00-18:00',phone:'1230'},
-  // JIZZAX
-  {id:30,region:'Jizzax',name:'JIZZAX MARKAZ',addr:'Jizzax shahri, Sharq ko\'chasi',time:'09:00-18:00',phone:'1230'},
-  // SIRDARYO
-  {id:31,region:'Sirdaryo',name:'GULISTON',addr:'Guliston shahri, markaziy ko\'cha',time:'09:00-18:00',phone:'1230'},
-  {id:32,region:'Sirdaryo',name:'OQOLTIN',addr:'Oqoltin tumani, Saxavat MFY, Tinchlik ko\'chasi 37',time:'09:00-18:00',phone:'+998 93 505 17 58'},
+  {id:66,r:'Toshkent viloyati',n:'ANGREN',a:'Angren shahri markazi',t:'09:00-18:00'},
+  {id:67,r:'Toshkent viloyati',n:'CHIRCHIQ',a:'Chirchiq shahri markazi',t:'09:00-18:00'},
+  {id:68,r:'Toshkent viloyati',n:'OLMALIQ',a:'Olmaliq shahri markazi',t:'09:00-18:00'},
+  {id:69,r:'Toshkent viloyati',n:'BEKOBOD',a:'Bekobod shahri markazi',t:'09:00-18:00'},
+  {id:70,r:'Toshkent viloyati',n:'YANGIYO\'L',a:'Yangiyo\'l shahri markazi',t:'09:00-18:00'},
+  {id:71,r:'Toshkent viloyati',n:'OHANGARON',a:'Ohangaron shahri markazi',t:'09:00-18:00'},
+  {id:72,r:'Toshkent viloyati',n:'KO\'KSAROY',a:'Toshkent tumani, Ko\'ksaroy AYP (Beltepa betonka)',t:'09:00-18:00'},
+  {id:73,r:'Toshkent viloyati',n:'QUSHBEGI',a:'Qushbegi massivi, kichik halqa yo\'li 23-uy',t:'09:00-18:00'},
+  {id:74,r:'Toshkent viloyati',n:'NURAFSHON',a:'Nurafshon shahri markazi',t:'09:00-18:00'},
+  {id:75,r:'Toshkent viloyati',n:'KIBRAY',a:'Kibray tumani markazi',t:'09:00-18:00'},
+  // NAMANGAN VILOYATI
+  {id:76,r:'Namangan viloyati',n:'NAMANGAN MARKAZ',a:'Istiqlol ko\'chasi, markaziy ofis',t:'09:00-18:00'},
+  {id:77,r:'Namangan viloyati',n:'NAMANGAN BOZOR',a:'Shahar bozori yaqini',t:'09:00-17:00'},
+  {id:78,r:'Namangan viloyati',n:'UCHQO\'RG\'ON',a:'Uchqo\'rg\'on tumani, markaziy ko\'cha',t:'09:00-17:00'},
+  {id:79,r:'Namangan viloyati',n:'CHORTOQ',a:'Chortoq tumani, Markaziy ko\'cha',t:'09:00-17:00'},
+  {id:80,r:'Namangan viloyati',n:'POP',a:'Pop tumani markazi',t:'09:00-17:00'},
+  {id:81,r:'Namangan viloyati',n:'KOSONSOY',a:'Kosonsoy tumani markazi',t:'09:00-17:00'},
+  {id:82,r:'Namangan viloyati',n:'TO\'RAQO\'RG\'ON',a:'To\'raqo\'rg\'on tumani markazi',t:'09:00-17:00'},
+  {id:83,r:'Namangan viloyati',n:'MINGBULOQ',a:'Mingbuloq tumani markazi',t:'09:00-17:00'},
+  {id:84,r:'Namangan viloyati',n:'NORIN',a:'Norin tumani markazi',t:'09:00-17:00'},
+  {id:85,r:'Namangan viloyati',n:'CHUST',a:'Chust tumani markazi',t:'09:00-17:00'},
+  {id:86,r:'Namangan viloyati',n:'YANGIQO\'RG\'ON',a:'Yangiqo\'rg\'on tumani markazi',t:'09:00-17:00'},
+  // ANDIJON VILOYATI
+  {id:87,r:'Andijon viloyati',n:'ANDIJON MARKAZ',a:'Navro\'z ko\'chasi, markaziy ofis',t:'09:00-18:00'},
+  {id:88,r:'Andijon viloyati',n:'ANDIJON BOZOR',a:'Jahon bozori yaqini',t:'09:00-17:00'},
+  {id:89,r:'Andijon viloyati',n:'SHAHRIXON',a:'Chinobod ko\'chasi 7-uy (Pasport stol yonida)',t:'09:00-18:00'},
+  {id:90,r:'Andijon viloyati',n:'ULUGʻNOR',a:'Shaxrixon ko\'chasi (Ipotekabank yonida)',t:'09:00-18:00'},
+  {id:91,r:'Andijon viloyati',n:'XONOBOD',a:'Xonobod shahri markazi',t:'09:00-17:00'},
+  {id:92,r:'Andijon viloyati',n:'MARHAMAT',a:'Marhamat tumani markazi',t:'09:00-17:00'},
+  {id:93,r:'Andijon viloyati',n:'ASAKA',a:'Asaka shahri markazi',t:'09:00-17:00'},
+  {id:94,r:'Andijon viloyati',n:'PAXTAOBOD',a:'Paxtaobod tumani markazi',t:'09:00-17:00'},
+  {id:95,r:'Andijon viloyati',n:'BALIQCHI',a:'Baliqchi tumani markazi',t:'09:00-17:00'},
+  {id:96,r:'Andijon viloyati',n:'JALOLQUDUQ',a:'Jalolquduq tumani markazi',t:'09:00-17:00'},
+  // FARG'ONA VILOYATI
+  {id:97,r:'Farg\'ona viloyati',n:'FARG\'ONA MARKAZ',a:'Mustaqillik ko\'chasi, markaziy ofis',t:'09:00-18:00'},
+  {id:98,r:'Farg\'ona viloyati',n:'QO\'QON',a:'Qo\'qon shahri markazi',t:'09:00-18:00'},
+  {id:99,r:'Farg\'ona viloyati',n:'MARG\'ILON',a:'Marg\'ilon shahri markazi',t:'09:00-17:00'},
+  {id:100,r:'Farg\'ona viloyati',n:'UCHKO\'PRIK (SALANG)',a:'Salang ko\'chasi (Salang metan yonida)',t:'09:00-17:00'},
+  {id:101,r:'Farg\'ona viloyati',n:'QOROVULBOZOR',a:'Qorovulbozor tumani markazi',t:'09:00-17:00'},
+  {id:102,r:'Farg\'ona viloyati',n:'DANG\'ARA',a:'Dang\'ara tumani markazi',t:'09:00-17:00'},
+  {id:103,r:'Farg\'ona viloyati',n:'BESHARIQ',a:'Beshariq tumani markazi',t:'09:00-17:00'},
+  {id:104,r:'Farg\'ona viloyati',n:'RISHTON',a:'Rishton tumani markazi',t:'09:00-17:00'},
+  {id:105,r:'Farg\'ona viloyati',n:'OLTIARIQ',a:'Oltiariq tumani markazi',t:'09:00-17:00'},
+  // SAMARQAND VILOYATI
+  {id:106,r:'Samarqand viloyati',n:'SAMARQAND MARKAZ',a:'Registon ko\'chasi, markaziy ofis',t:'09:00-18:00'},
+  {id:107,r:'Samarqand viloyati',n:'SAMARQAND BOZOR',a:'Siob bozori yaqini',t:'09:00-17:00'},
+  {id:108,r:'Samarqand viloyati',n:'KATTAQO\'RG\'ON',a:'Kattaqo\'rg\'on shahri markazi',t:'09:00-17:00'},
+  {id:109,r:'Samarqand viloyati',n:'JOMBOY',a:'Farhod shaharchasi 3a-uy (Notarius yonida)',t:'09:00-17:00'},
+  {id:110,r:'Samarqand viloyati',n:'URGUT',a:'Urgut tumani markazi',t:'09:00-17:00'},
+  {id:111,r:'Samarqand viloyati',n:'ISHTIXON',a:'Ishtixon tumani markazi',t:'09:00-17:00'},
+  {id:112,r:'Samarqand viloyati',n:'PAYARIQ',a:'Payariq tumani markazi',t:'09:00-17:00'},
+  {id:113,r:'Samarqand viloyati',n:'NUROBOD',a:'Nurobod tumani markazi',t:'09:00-17:00'},
+  // BUXORO VILOYATI
+  {id:114,r:'Buxoro viloyati',n:'BUXORO MARKAZ',a:'Buxoro shahri markaziy ko\'cha',t:'09:00-18:00'},
+  {id:115,r:'Buxoro viloyati',n:'KOGON',a:'Kogon tumani markazi',t:'09:00-17:00'},
+  {id:116,r:'Buxoro viloyati',n:'G\'IJDUVON',a:'G\'ijduvon tumani markazi',t:'09:00-17:00'},
+  {id:117,r:'Buxoro viloyati',n:'QOROVULBOZOR',a:'Qorovulbozor tumani markazi',t:'09:00-17:00'},
+  {id:118,r:'Buxoro viloyati',n:'ROMITAN',a:'Romitan tumani markazi',t:'09:00-17:00'},
+  {id:119,r:'Buxoro viloyati',n:'VOBKENT',a:'Vobkent tumani markazi',t:'09:00-17:00'},
+  // QASHQADARYO VILOYATI
+  {id:120,r:'Qashqadaryo viloyati',n:'QARSHI MARKAZ',a:'Qarshi shahri markaziy ofis',t:'09:00-18:00'},
+  {id:121,r:'Qashqadaryo viloyati',n:'SHAHRISABZ',a:'Shahrisabz shahri markazi',t:'09:00-17:00'},
+  {id:122,r:'Qashqadaryo viloyati',n:'KITOB',a:'Kitob tumani markazi',t:'09:00-17:00'},
+  {id:123,r:'Qashqadaryo viloyati',n:'MUBORAK',a:'Muborak shahri markazi',t:'09:00-17:00'},
+  {id:124,r:'Qashqadaryo viloyati',n:'KASBI',a:'Kasbi tumani markazi',t:'09:00-17:00'},
+  {id:125,r:'Qashqadaryo viloyati',n:'CHIROQCHI',a:'Chiroqchi tumani markazi',t:'09:00-17:00'},
+  // SURXONDARYO VILOYATI
+  {id:126,r:'Surxondaryo viloyati',n:'TERMIZ MARKAZ',a:'Termiz shahri markaziy ofis',t:'09:00-18:00'},
+  {id:127,r:'Surxondaryo viloyati',n:'OLTINSOY',a:'Ipoq MFY, Oltindala ko\'chasi 10 (Okean to\'yxonasi ro\'parasi)',t:'09:00-17:00'},
+  {id:128,r:'Surxondaryo viloyati',n:'DENOV',a:'Denov tumani markazi',t:'09:00-17:00'},
+  {id:129,r:'Surxondaryo viloyati',n:'SHO\'RCHI',a:'Sho\'rchi tumani markazi',t:'09:00-17:00'},
+  {id:130,r:'Surxondaryo viloyati',n:'BOYSUN',a:'Boysun tumani markazi',t:'09:00-17:00'},
+  {id:131,r:'Surxondaryo viloyati',n:'QUMQO\'RG\'ON',a:'Qumqo\'rg\'on tumani markazi',t:'09:00-17:00'},
+  // XORAZM VILOYATI
+  {id:132,r:'Xorazm viloyati',n:'URGANCH MARKAZ',a:'Urganch shahri markaziy ofis',t:'09:00-18:00'},
+  {id:133,r:'Xorazm viloyati',n:'XIVA',a:'Xiva shahri markazi',t:'09:00-17:00'},
+  {id:134,r:'Xorazm viloyati',n:'XONQA',a:'Xonqa tumani markazi',t:'09:00-17:00'},
+  {id:135,r:'Xorazm viloyati',n:'GURLAN',a:'Gurlan tumani markazi',t:'09:00-17:00'},
+  {id:136,r:'Xorazm viloyati',n:'BOG\'OT',a:'Bog\'ot tumani markazi',t:'09:00-17:00'},
+  {id:137,r:'Xorazm viloyati',n:'YANGIBOZOR',a:'Yangibozor tumani markazi',t:'09:00-17:00'},
+  // NAVOIY VILOYATI
+  {id:138,r:'Navoiy viloyati',n:'NAVOIY MARKAZ',a:'Navoiy shahri markaziy ko\'cha',t:'09:00-18:00'},
+  {id:139,r:'Navoiy viloyati',n:'ZARAFSHON',a:'Zarafshon shahri markazi',t:'09:00-17:00'},
+  {id:140,r:'Navoiy viloyati',n:'KARMANA',a:'Karmana tumani markazi',t:'09:00-17:00'},
+  {id:141,r:'Navoiy viloyati',n:'NUROTA',a:'Nurota tumani markazi',t:'09:00-17:00'},
+  {id:142,r:'Navoiy viloyati',n:'KONIMEX',a:'Konimex (Uchquduq) tumani markazi',t:'09:00-17:00'},
+  // JIZZAX VILOYATI
+  {id:143,r:'Jizzax viloyati',n:'JIZZAX MARKAZ',a:'Sharq ko\'chasi, markaziy ofis',t:'09:00-18:00'},
+  {id:144,r:'Jizzax viloyati',n:'G\'ALLAOROL',a:'G\'allaorol tumani markazi',t:'09:00-17:00'},
+  {id:145,r:'Jizzax viloyati',n:'ARNASOY',a:'Arnasoy tumani markazi',t:'09:00-17:00'},
+  {id:146,r:'Jizzax viloyati',n:'ZAFAROBOD',a:'Zafarobod tumani markazi',t:'09:00-17:00'},
+  // SIRDARYO VILOYATI
+  {id:147,r:'Sirdaryo viloyati',n:'GULISTON',a:'Guliston shahri markaziy ko\'cha',t:'09:00-18:00'},
+  {id:148,r:'Sirdaryo viloyati',n:'OQOLTIN',a:'Saxavat MFY, Tinchlik ko\'chasi 37',t:'09:00-17:00'},
+  {id:149,r:'Sirdaryo viloyati',n:'SHIRIN',a:'Shirin shahri markazi',t:'09:00-17:00'},
+  {id:150,r:'Sirdaryo viloyati',n:'BOYOVUT',a:'Boyovut tumani markazi',t:'09:00-17:00'},
+  {id:151,r:'Sirdaryo viloyati',n:'SARDOBA',a:'Sardoba tumani markazi',t:'09:00-17:00'},
   // QORAQALPOG'ISTON
-  {id:33,region:'Qoraqalpog\'iston',name:'NUKUS MARKAZ',addr:'Nukus shahri, markaziy ofis',time:'09:00-18:00',phone:'1230'},
+  {id:152,r:'Qoraqalpog\'iston',n:'NUKUS MARKAZ',a:'Nukus shahri markaziy ofis',t:'09:00-18:00'},
+  {id:153,r:'Qoraqalpog\'iston',n:'QANLIKO\'L',a:'Dosliq ko\'chasi 63-uy',t:'09:00-17:00'},
+  {id:154,r:'Qoraqalpog\'iston',n:'MO\'YNOQ',a:'Mo\'ynoq tumani markazi',t:'09:00-17:00'},
+  {id:155,r:'Qoraqalpog\'iston',n:'XO\'JAYLI',a:'Xo\'jayli tumani markazi',t:'09:00-17:00'},
+  {id:156,r:'Qoraqalpog\'iston',n:'BERUNIY',a:'Beruniy tumani markazi',t:'09:00-17:00'},
+  {id:157,r:'Qoraqalpog\'iston',n:'TURTKUL',a:'Turtkul tumani markazi',t:'09:00-17:00'},
 ];
 
-let products=[], cart=[], curProd=null, curSize=null, curPay='click', curFilter='all', selBTS=null, curSearch='';
+let products=[],cart=[],curProd=null,curSize=null,curPay='click',selBTS=null;
+let curFilter='all',curSearch='',filteredBTS=[],curSlide=0;
 
 async function loadProducts(){
-  try{
-    const r=await fetch(API+'/api/products');
-    products=await r.json();
-  }catch{products=[];}
+  try{const r=await fetch(API+'/api/products');products=await r.json();}
+  catch{products=[];}
   renderGrid();
 }
-
-// Random tall/sq for masonry effect
-function getImgStyle(id){return id%3===0?'tall':'sq';}
 
 function renderGrid(){
   const g=document.getElementById('grid');
   let list=products;
-  if(curFilter!=='all') list=list.filter(p=>p.category===curFilter);
-  if(curSearch) list=list.filter(p=>p.name.toLowerCase().includes(curSearch.toLowerCase()));
+  if(curFilter!=='all')list=list.filter(p=>p.category===curFilter);
+  if(curSearch)list=list.filter(p=>p.name.toLowerCase().includes(curSearch.toLowerCase()));
   if(!list.length){
-    g.innerHTML=`<div class="empty-g" style="column-span:all"><div class="ei">🎽</div><p>Mahsulot topilmadi</p></div>`;
+    g.innerHTML=`<div class="empty-g"><div class="ei">🎽</div><p>Mahsulot topilmadi</p></div>`;
     return;
   }
   g.innerHTML=list.map(p=>`
-    <div class="mcard" onclick="openModal(${p.id})">
-      ${p.image_url
-        ?`<img src="${p.image_url}" loading="lazy" onerror="this.outerHTML='<div class=\\"ph ${getImgStyle(p.id)}\\">${p.emoji||'👕'}</div>'">`
-        :`<div class="ph ${getImgStyle(p.id)}">${p.emoji||'👕'}</div>`}
-      <div class="mcard-body">
-        <div class="mcard-name">${p.name}</div>
-        <div class="mcard-price">${Number(p.price).toLocaleString()} so'm</div>
-        <div class="mcard-sizes">${SIZES.map(s=>`<span class="msz">${s}</span>`).join('')}</div>
-        <span class="mcard-tag">${catName(p.category)}</span>
+    <div class="card" onclick="openModal(${p.id})">
+      <div class="card-img-wrap">
+        ${p.image_url
+          ?`<img src="${p.image_url}" loading="lazy" onerror="this.outerHTML='<div class=\\"card-ph\\">${p.emoji||'👕'}</div>'">`
+          :`<div class="card-ph">${p.emoji||'👕'}</div>`}
+        <div class="card-fav">🤍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-price">${Number(p.price).toLocaleString()} so'm</div>
+        <div class="card-rating">⭐ 5.0</div>
+        <div class="card-sizes">${SIZES.map(s=>`<span class="csz">${s}</span>`).join('')}</div>
       </div>
     </div>
   `).join('');
 }
 
-function catName(c){return{anime:'Anime',sport:'Sport',logo:'Logo',nature:'Tabiat',other:'Boshqa'}[c]||''}
-
 function doFilter(f,btn){
   curFilter=f;
   document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderGrid();
+  btn.classList.add('active');renderGrid();
 }
-
 function doSearch(v){curSearch=v;renderGrid();}
 
 function openModal(id){
-  curProd=products.find(p=>p.id===id);curSize=null;
-  const iw=document.getElementById('m-img-wrap');
-  iw.innerHTML=curProd.image_url
-    ?`<img class="m-img" src="${curProd.image_url}" onerror="this.outerHTML='<div class=\\"m-img-ph\\">${curProd.emoji||'👕'}</div>'">`
-    :`<div class="m-img-ph">${curProd.emoji||'👕'}</div>`;
+  curProd=products.find(p=>p.id===id);curSize=null;curSlide=0;
+  const images=curProd.images&&curProd.images.length?curProd.images:(curProd.image_url?[curProd.image_url]:[]);
+  const slides=document.getElementById('m-slides');
+  const dots=document.getElementById('m-dots');
+  if(images.length){
+    slides.innerHTML=images.map(img=>`<img class="gslide" src="${img}" onerror="this.outerHTML='<div class=\\"gslide-ph\\">${curProd.emoji||'👕'}</div>'">`).join('');
+    dots.innerHTML=images.length>1?images.map((_,i)=>`<div class="gdot${i===0?' active':''}" onclick="goSlide(${i})"></div>`).join(''):'';
+    slides.style.transform='translateX(0)';
+    let sx=0;
+    const gal=document.getElementById('m-gallery');
+    gal.ontouchstart=e=>{sx=e.touches[0].clientX;};
+    gal.ontouchend=e=>{
+      const dx=e.changedTouches[0].clientX-sx;
+      if(dx<-50&&curSlide<images.length-1)goSlide(curSlide+1);
+      else if(dx>50&&curSlide>0)goSlide(curSlide-1);
+    };
+  }else{
+    slides.innerHTML=`<div class="gslide-ph">${curProd.emoji||'👕'}</div>`;
+    dots.innerHTML='';
+  }
   document.getElementById('m-name').textContent=curProd.name;
   document.getElementById('m-price').textContent=Number(curProd.price).toLocaleString()+' so\'m';
+  document.getElementById('m-desc').textContent=curProd.description||'100% paxta material. Yuqori sifatli print. Mashinada yuviladi. O\'zbekistonda ishlab chiqarilgan.';
   document.getElementById('m-sizes').innerHTML=SIZES.map(s=>`<button class="szopt" onclick="selSize('${s}',this)">${s}</button>`).join('');
   const btn=document.getElementById('m-add');
   btn.disabled=true;btn.textContent='Razmerni tanlang';
   document.getElementById('overlay').classList.add('open');
 }
 
+function goSlide(i){
+  curSlide=i;
+  document.getElementById('m-slides').style.transform=`translateX(-${i*100}%)`;
+  document.querySelectorAll('.gdot').forEach((d,j)=>d.classList.toggle('active',j===i));
+}
 function selSize(s,el){
   curSize=s;
   document.querySelectorAll('.szopt').forEach(b=>b.classList.remove('active'));
@@ -385,9 +516,7 @@ function selSize(s,el){
   const btn=document.getElementById('m-add');
   btn.disabled=false;btn.textContent='Savatga qo\'shish 🛒';
 }
-
 function closeModal(e){if(e.target===document.getElementById('overlay'))document.getElementById('overlay').classList.remove('open');}
-
 function addCart(){
   if(!curSize)return;
   const ex=cart.find(i=>i.id===curProd.id&&i.size===curSize);
@@ -396,34 +525,27 @@ function addCart(){
   document.getElementById('overlay').classList.remove('open');
   toast('✅ Savatga qo\'shildi!');
 }
-
 function updateBadge(){
   const n=cart.reduce((s,i)=>s+i.qty,0);
   const b=document.getElementById('badge');
   b.textContent=n;b.classList.toggle('on',n>0);
 }
-
 function go(page){
   document.getElementById('p-cat').style.display='none';
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
-  if(page==='p-cat'){document.getElementById('p-cat').style.display='block';}
-  else{document.getElementById(page).classList.add('show');}
+  if(page==='p-cat')document.getElementById('p-cat').style.display='block';
+  else document.getElementById(page).classList.add('show');
   window.scrollTo(0,0);
 }
-
 function goCart(){renderCart();go('p-cart');}
-
 function renderCart(){
   const el=document.getElementById('cart-list');
-  if(!cart.length){
-    el.innerHTML=`<div class="empty-g"><div class="ei">🛒</div><p>Savat bo'sh</p></div>`;
-    return;
-  }
-  const items=cart.map((item,i)=>`
+  if(!cart.length){el.innerHTML=`<div class="empty-g" style="grid-column:unset"><div class="ei">🛒</div><p>Savat bo'sh</p></div>`;return;}
+  const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const total=sub+DELIVERY;
+  el.innerHTML=cart.map((item,i)=>`
     <div class="citem">
-      <div class="ci-img">
-        ${item.image_url?`<img src="${item.image_url}" style="width:100%;height:100%;object-fit:cover;border-radius:10px" onerror="this.style.display='none'">`:(item.emoji||'👕')}
-      </div>
+      <div class="ci-img">${item.image_url?`<img src="${item.image_url}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">`:(item.emoji||'👕')}</div>
       <div class="ci-info">
         <div class="ci-name">${item.name}</div>
         <div class="ci-sub">Razmer: ${item.size} · ${item.qty} dona</div>
@@ -431,10 +553,7 @@ function renderCart(){
       </div>
       <button class="ci-rm" onclick="removeItem(${i})">✕</button>
     </div>
-  `).join('');
-  const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const total=sub+DELIVERY;
-  el.innerHTML=items+`
+  `).join('')+`
     <div class="sbox">
       <div class="srow"><span>Mahsulotlar</span><span>${sub.toLocaleString()} so'm</span></div>
       <div class="srow"><span>BTS yetkazish</span><span>${DELIVERY.toLocaleString()} so'm</span></div>
@@ -443,90 +562,72 @@ function renderCart(){
     <button class="prim-btn" onclick="go('p-order')">Buyurtma berish →</button>
   `;
 }
-
 function removeItem(i){cart.splice(i,1);updateBadge();renderCart();}
-
-// BTS
-let filteredBTS=[];
 function filterBTS(){
-  const region=document.getElementById('f-region').value;
-  filteredBTS=region?BTS_POINTS.filter(b=>b.region===region):[];
+  const r=document.getElementById('f-region').value;
+  filteredBTS=r?BTS.filter(b=>b.r===r):[];
   renderBTS(filteredBTS);
-  selBTS=null;
-  document.getElementById('bts-selected').classList.remove('on');
+  selBTS=null;document.getElementById('sel-bts').classList.remove('on');
+  document.getElementById('bts-s').value='';
 }
-
 function searchBTS(v){
-  const region=document.getElementById('f-region').value;
-  let list=region?BTS_POINTS.filter(b=>b.region===region):BTS_POINTS;
-  if(v)list=list.filter(b=>b.name.toLowerCase().includes(v.toLowerCase())||b.addr.toLowerCase().includes(v.toLowerCase()));
+  const r=document.getElementById('f-region').value;
+  let list=r?BTS.filter(b=>b.r===r):BTS;
+  if(v)list=list.filter(b=>b.n.toLowerCase().includes(v.toLowerCase())||b.a.toLowerCase().includes(v.toLowerCase()));
   renderBTS(list);
 }
-
 function renderBTS(list){
   const el=document.getElementById('bts-list');
-  if(!list.length){el.innerHTML=`<div style="padding:16px;text-align:center;color:var(--muted);font-size:13px">Topilmadi</div>`;return;}
+  if(!list.length){el.innerHTML=`<div style="padding:14px;text-align:center;color:var(--muted);font-size:13px">${document.getElementById('f-region').value?'Topilmadi':'Avval viloyatni tanlang ⬆️'}</div>`;return;}
   el.innerHTML=list.map(b=>`
-    <div class="bts-item ${selBTS&&selBTS.id===b.id?'sel':''}" onclick="selectBTS(${b.id})">
-      <div class="bts-name">📦 ${b.name}</div>
-      <div class="bts-addr">${b.addr}</div>
-      <div class="bts-time">⏰ ${b.time} · ☎️ ${b.phone}</div>
+    <div class="bitem${selBTS&&selBTS.id===b.id?' sel':''}" onclick="selectBTS(${b.id})">
+      <div class="bitem-name">📦 ${b.n}</div>
+      <div class="bitem-addr">${b.a}</div>
+      <div class="bitem-time">⏰ ${b.t}</div>
     </div>
   `).join('');
 }
-
 function selectBTS(id){
-  selBTS=BTS_POINTS.find(b=>b.id===id);
-  document.querySelectorAll('.bts-item').forEach(el=>{
-    el.classList.toggle('sel',el.querySelector('.bts-name').textContent.includes(selBTS.name));
-  });
-  document.getElementById('sel-bts-name').textContent='📦 '+selBTS.name;
-  document.getElementById('sel-bts-addr').textContent=selBTS.addr+' · ⏰ '+selBTS.time;
-  document.getElementById('bts-selected').classList.add('on');
+  selBTS=BTS.find(b=>b.id===id);
+  const r=document.getElementById('f-region').value;
+  filteredBTS=r?BTS.filter(b=>b.r===r):[];
+  renderBTS(filteredBTS);
+  document.getElementById('sel-bts-name').textContent='📦 '+selBTS.n;
+  document.getElementById('sel-bts-addr').textContent=selBTS.a+' · ⏰ '+selBTS.t;
+  document.getElementById('sel-bts').classList.add('on');
   toast('✅ BTS punkt tanlandi!');
 }
-
 function selPay(m){
   curPay=m;
-  ['click','payme','cash'].forEach(k=>document.getElementById('pay-'+k).classList.toggle('active',k===m));
+  ['click','payme'].forEach(k=>document.getElementById('pay-'+k).classList.toggle('active',k===m));
 }
-
 async function submitOrder(){
   const name=document.getElementById('f-name').value.trim();
   const phone=document.getElementById('f-phone').value.trim();
   const region=document.getElementById('f-region').value;
+  const city=document.getElementById('f-city').value.trim();
   const note=document.getElementById('f-note').value.trim();
-  if(!name||!phone){toast('⚠️ Ism va telefon kiriting!');return;}
+  if(!name||!phone){toast('⚠️ Ism-familiya va telefon kiriting!');return;}
   if(!region){toast('⚠️ Viloyatni tanlang!');return;}
+  if(!city){toast('⚠️ Shahar yoki tumanni kiriting!');return;}
   if(!selBTS){toast('⚠️ BTS punktni tanlang!');return;}
-
-  const order={name,phone,region,bts_point:selBTS,pay:curPay,note,cart,
+  const order={name,phone,region,city,bts_point:selBTS,pay:curPay,note,cart,
     total:cart.reduce((s,i)=>s+i.price*i.qty,0)+DELIVERY,
     tg_user:tg?.initDataUnsafe?.user};
-
-  try{await fetch(API+'/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)});}
-  catch(e){console.log('offline');}
-
-  // Success
+  try{await fetch(API+'/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)});}catch{}
   document.getElementById('suc-bts-info').innerHTML=`
-    <div class="bts-time">📦 Buyurtmangiz shu BTS punktga yetkaziladi:</div>
-    <div class="bts-name" style="margin-top:6px">${selBTS.name}</div>
-    <div class="bts-addr">${selBTS.addr}</div>
-    <div class="bts-time">⏰ Ish vaqti: ${selBTS.time}</div>
+    <div style="font-size:11px;color:var(--accent);font-weight:700;margin-bottom:6px">📦 Buyurtmangiz shu BTS punktga yetkaziladi:</div>
+    <div style="font-size:14px;font-weight:800">${selBTS.n}</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">${selBTS.a}</div>
+    <div style="font-size:11px;color:var(--accent);margin-top:3px;font-weight:600">⏰ ${selBTS.t}</div>
   `;
-  cart=[];updateBadge();selBTS=null;
-  go('p-success');
+  cart=[];updateBadge();selBTS=null;go('p-success');
 }
-
-function backShop(){go('p-cat');}
-
 function toast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('on');
   setTimeout(()=>t.classList.remove('on'),2500);
 }
-
-// INIT
 document.getElementById('p-cat').style.display='block';
 loadProducts();
 </script>
